@@ -1,5 +1,3 @@
----
-````markdown
 # CSV File Splitter & Sanity Checker
 
 ## Overview

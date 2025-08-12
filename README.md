@@ -15,8 +15,19 @@ Two sample datasets are included for testing.
 The datasets listed below are provided in compressed (`.zip`) format due to their large size.  
 Before running any scripts, extract them to the **root directory** of this project.
 
-- `chicago_crimes.csv` 
-- `nyc_collisions.csv`
+You can extract the datasets into the current directory using the following commands:
+
+```bash
+unzip -j chicago_crimes.zip -d .
+unzip -j nyc_collisions.zip -d .
+```
+
+These commands will:
+
+* **`-j`**: Ignore any folder paths inside the ZIP file and place the contents directly in the current directory.
+* **`-d .`**: Specify the current directory (`.`) as the extraction destination.
+
+After running them, you should see `chicago_crimes.csv` and `nyc_collisions.csv` in the same folder as your project files.
 
 ---
 

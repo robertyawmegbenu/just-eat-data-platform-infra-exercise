@@ -1,3 +1,4 @@
+---
 ````markdown
 # CSV File Splitter & Sanity Checker
 
@@ -34,6 +35,7 @@ Two **sample datasets** are included for testing:
 ├── chicago_crimes.csv          # Sample dataset 1
 ├── nyc_collisions.csv          # Sample dataset 2
 ```
+
 ````
 
 ---
@@ -196,8 +198,4 @@ python sanity_check.py \
   --recombine
 ```
 
----
-
-```
-
-```
+````

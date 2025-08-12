@@ -75,7 +75,7 @@ Before running any scripts, extract them to the **root directory** of this proje
 Before processing large datasets, run the test suite to verify functionality:
 
 ```bash
-pytest -vvv
+pytest -vvv tests/test_splitter.py
 ```
 
 If all tests pass, you may proceed with splitting and validating real data.

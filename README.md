@@ -2,21 +2,21 @@
 
 ## Overview
 
-This project was implemented as part of a **Data Engineer recruitment coding exercise** for **Just Eat**.  
-The task was to design and implement a **command-line application** that:
+This project was developed as part of a **Data Engineer recruitment coding exercise** for **Just Eat**.  
+It provides a **command-line application** capable of:
 
-1. **Splits a large CSV file** into multiple smaller files without exceeding specified **maximum size** and **maximum number of lines**.
-2. **Validates** the generated parts against constraints to ensure data integrity.
-3. **Optionally recombines** the split files and verifies they match the original CSV in both structure and record count.
+1. Splitting a large CSV file into multiple smaller files without exceeding specified maximum file size (in bytes) and maximum number of lines.
+2. Validating the generated parts against these constraints to ensure data integrity.
+3. Optionally recombining the split files and verifying that they match the original CSV in both structure and record count.
 
-Two **sample datasets** are included for testing:
+Two sample datasets are included for testing.
 
-**Note:**  
-The following datasets are **zipped** due to their large size.  
-Please **unzip** them into the **root directory** of this project before running any scripts.
+**Important:**  
+The datasets listed below are provided in compressed (`.zip`) format due to their large size.  
+Before running any scripts, extract them to the **root directory** of this project.
 
-- `chicago_crimes.csv` (~900 MB)
-- `nyc_collisions.csv` (~125 MB)
+- `chicago_crimes.csv` (approximately 900 MB)
+- `nyc_collisions.csv` (approximately 125 MB)
 
 ---
 
@@ -27,18 +27,16 @@ Please **unzip** them into the **root directory** of this project before running
 ├── file-splitter.sh           # Bash wrapper to run the file_splitter package
 ├── file_splitter/              # Python package for splitting CSV files
 │   ├── __init__.py
-│   ├── __main__.py             # Allows `python -m file_splitter` usage
+│   ├── __main__.py             # Enables `python -m file_splitter` usage
 │   ├── cli.py                  # CLI argument parsing
 │   └── splitter.py             # Core CSV splitting logic
-├── sanity_check.py             # Validates split files & generates reports
-├── sanity_checks/              # Output folder for JSON & TXT reports
+├── sanity_check.py             # Validates split files and generates reports
+├── sanity_checks/              # Output folder for JSON and TXT reports
 ├── tests/
 │   └── test_splitter.py        # Pytest-based unit tests for splitter logic
-├── chicago_crimes.csv          # Sample dataset 1
-├── nyc_collisions.csv          # Sample dataset 2
+├── chicago_crimes.csv          # Sample dataset 1 (unzipped)
+├── nyc_collisions.csv          # Sample dataset 2 (unzipped)
 ```
-
-````
 
 ---
 
@@ -46,49 +44,49 @@ Please **unzip** them into the **root directory** of this project before running
 
 ### 1. CSV Splitting
 
-- Preserves **headers** in each output part.
-- Ensures **max size** (bytes) and **max line** constraints.
+- Preserves headers in each output file.
+- Enforces both maximum size (bytes) and maximum lines per file.
 - Flexible CLI with required parameters.
 
 ### 2. Sanity Checks
 
-- Verifies **max bytes** and **max lines** constraints for each part.
-- Compares **headers** between original and all split parts.
-- Recombines all split parts into a single CSV and verifies:
+- Verifies maximum bytes and maximum lines constraints for each file part.
+- Confirms that headers match between the original file and all split parts.
+- Recombines all split parts into a single CSV and checks:
 
   - Total line count matches the original.
-  - Only one header row exists in recombined file.
+  - Only one header row is present in the recombined file.
 
-- Produces both **JSON** and **human-readable TXT reports**.
+- Generates both JSON and human-readable TXT reports.
 
 ### 3. Testing
 
-- `pytest` test suite to ensure splitter logic works correctly.
-- Includes tests for:
+- Includes a `pytest` suite to ensure the splitter logic works as intended.
+- Tests cover:
 
   - File naming sequence
   - Header preservation
-  - File size & line limits
+  - File size and line limits
 
 ---
 
-## Running the Tests First
+## Running the Tests
 
-Before running the scripts on sample files, verify functionality using `pytest`:
+Before processing large datasets, run the test suite to verify functionality:
 
 ```bash
 pytest -vvv
 ```
 
-If all tests pass, you are safe to run the splitter and sanity check on real data.
+If all tests pass, you may proceed with splitting and validating real data.
 
 ---
 
 ## Usage
 
-### 1️. Split a CSV File
+### Step 1 — Split a CSV File
 
-Using the Bash wrapper:
+Using the Bash Script:
 
 ```bash
 ./file-splitter.sh \
@@ -98,7 +96,7 @@ Using the Bash wrapper:
   --max-lines 50000
 ```
 
-Or directly via Python:
+Or directly with Python:
 
 ```bash
 python -m file_splitter \
@@ -108,7 +106,7 @@ python -m file_splitter \
   --max-lines 50000
 ```
 
-**Output example:**
+**Example output:**
 
 ```
 out_collisions/nyc_collisions-part0.csv
@@ -118,7 +116,7 @@ out_collisions/nyc_collisions-part1.csv
 
 ---
 
-### 2️. Run Sanity Checks
+### Step 2 — Run Sanity Checks
 
 After splitting:
 
@@ -132,11 +130,11 @@ python sanity_check.py \
   --recombine
 ```
 
-**This will:**
+This will:
 
-- Validate all parts against limits.
-- Ensure headers match.
-- Recombine parts and compare with the original.
+- Validate all parts against size and line limits.
+- Ensure headers match across all files.
+- Recombine the files and compare them to the original.
 - Save reports to `sanity_checks/`:
 
 ```
@@ -171,9 +169,9 @@ PASSED (all checks): True
 
 ## Notes
 
-- Provided datasets are large enough to properly test **file splitting at scale**.
-- You can intentionally corrupt files (e.g., change a header or append extra rows) to test failure cases in `sanity_check.py`.
-- All scripts are designed to be **cross-platform** and run on Python 3.8+.
+- The provided datasets are sufficiently large to test splitting at scale.
+- You can intentionally corrupt files (e.g., change headers or add extra rows) to test failure scenarios in `sanity_check.py`.
+- All scripts are cross-platform and require Python 3.8 or later.
 
 ---
 
@@ -199,5 +197,3 @@ python sanity_check.py \
   --check-headers \
   --recombine
 ```
-
-````

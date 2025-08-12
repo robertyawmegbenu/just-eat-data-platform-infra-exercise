@@ -15,8 +15,8 @@ Two sample datasets are included for testing.
 The datasets listed below are provided in compressed (`.zip`) format due to their large size.  
 Before running any scripts, extract them to the **root directory** of this project.
 
-- `chicago_crimes.csv` (approximately 900 MB)
-- `nyc_collisions.csv` (approximately 125 MB)
+- `chicago_crimes.csv` 
+- `nyc_collisions.csv`
 
 ---
 

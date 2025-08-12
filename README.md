@@ -11,6 +11,10 @@ The task was to design and implement a **command-line application** that:
 
 Two **sample datasets** are included for testing:
 
+**Note:**  
+The following datasets are **zipped** due to their large size.  
+Please **unzip** them into the **root directory** of this project before running any scripts.
+
 - `chicago_crimes.csv` (~900 MB)
 - `nyc_collisions.csv` (~125 MB)
 
